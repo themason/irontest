@@ -17,6 +17,7 @@ public class Teststep {
     public static final String TYPE_DB = "DB";
     public static final String TYPE_IIB = "IIB";
     public static final String TYPE_MQ = "MQ";
+    public static final String TYPE_FILE = "FILE";
     public static final String TYPE_WAIT = "Wait";
 
     /* of IIB test step */
@@ -30,6 +31,10 @@ public class Teststep {
     public static final String ACTION_DEQUEUE = "Dequeue";
     public static final String ACTION_ENQUEUE = "Enqueue";
     public static final String ACTION_PUBLISH = "Publish";
+    
+    /* of FILE test step */
+    public static final String ACTION_WRITE = "Write";
+    public static final String ACTION_READ = "Read";
 
     private long id;   //  id being 0 means this is dynamically created test step object (no record in the Teststep database table).
     private long testcaseId;
@@ -37,7 +42,7 @@ public class Teststep {
     private String name;
     private String type;
     private String description;
-    private String action;            //  currently only used in MQ test step and IIB test step
+    private String action;            //  currently only used in MQ test step, IIB test step and FILE test step
     private Endpoint endpoint;
     private String endpointProperty;
     private Object request;
@@ -50,6 +55,7 @@ public class Teststep {
             @JsonSubTypes.Type(value = SOAPTeststepProperties.class, name = Teststep.TYPE_SOAP),
             @JsonSubTypes.Type(value = IIBTeststepProperties.class, name = Teststep.TYPE_IIB),
             @JsonSubTypes.Type(value = MQTeststepProperties.class, name = Teststep.TYPE_MQ),
+            @JsonSubTypes.Type(value = FILETeststepProperties.class, name = Teststep.TYPE_FILE),
             @JsonSubTypes.Type(value = WaitTeststepProperties.class, name = Teststep.TYPE_WAIT)})
     private Properties otherProperties = new Properties();
 
