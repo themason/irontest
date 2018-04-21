@@ -1,0 +1,26 @@
+<div class="form-group required">
+  <label for="endpointFileName" class="col-lg-2 control-label">FileName</label>
+  <div class="col-lg-10">
+    <input name="endpointFileName" type="text" class="form-control" ng-model="teststep.endpoint.otherProperties.fileName"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
+           id="endpointHost" ng-readonly="appStatus.isForbidden() ||
+             (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
+<div class="form-group required">
+  <label for="endpointFilePath" class="col-lg-2 control-label">FilePath</label>
+  <div class="col-lg-10">
+    <input name="endpointFilePath" type="text" class="form-control" ng-model="teststep.endpoint.otherProperties.filePath"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
+           id="endpointHost" ng-readonly="appStatus.isForbidden() ||
+             (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
+<div class="form-group form-group-reduced-bottom-margin" height-adjustable-element-in-column="0.7">
+  <label for="endpointContents" class="col-lg-2 control-label">Contents</label>
+  <div class="col-lg-10 full-height">
+    <textarea name="endpointContents" ng-change="autoSave(teststepForm.$valid)" ng-model="teststep.endpoint.otherProperties.contents"
+              id="endpointContents" placeholder="Contents" class="form-control full-height-important" spellcheck="false"
+              ng-readonly="appStatus.isForbidden()"></textarea>
+  </div>
+</div>

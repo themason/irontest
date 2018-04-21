@@ -1,0 +1,24 @@
+<div class="form-group required">
+  <label for="endpointFileName" class="col-lg-2 control-label">FileName</label>
+  <div class="col-lg-10">
+    <input name="fileName" type="text" class="form-control" ng-model="endpoint.otherProperties.fileName"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
+           id="fileName" ng-readonly="appStatus.isForbidden()">
+  </div>
+</div>
+<div class="form-group required">
+  <label for="filePath" class="col-lg-2 control-label">FilePath</label>
+  <div class="col-lg-10"> 
+    <input name="filePath" type="text" class="form-control" ng-model="endpoint.otherProperties.filePath"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
+           id="filePath" ng-readonly="appStatus.isForbidden()">
+  </div>
+</div>
+<div class="form-group form-group-reduced-bottom-margin">
+  <label for="contents" class="col-lg-2 control-label">Contents</label>
+  <div class="col-lg-10 full-height">
+    <textarea name="contents" ng-change="autoSave(teststepForm.$valid)"
+              id="contents" placeholder="Contents" class="form-control full-height-important" spellcheck="false"
+              ng-readonly="appStatus.isForbidden()"></textarea>
+  </div>
+</div>
