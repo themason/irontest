@@ -79,6 +79,8 @@ public abstract class EndpointDAO {
                 endpoint.setOtherProperties(endpointProperties);
             } else if (Teststep.TYPE_IIB.equals(teststepType)) {
                 endpoint.setType(Endpoint.TYPE_IIB);
+            } else if (Teststep.TYPE_FILE.equals(teststepType)) {
+            	endpoint.setType(Endpoint.TYPE_FILE);
             }
             long id = insertUnmanagedEndpoint_NoTransaction(endpoint);
             endpoint.setId(id);
