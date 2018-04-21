@@ -16,6 +16,7 @@ public class Endpoint {
     public static final String TYPE_DB = "DB";
     public static final String TYPE_MQ = "MQ";
     public static final String TYPE_IIB = "IIB";
+    public static final String TYPE_FILE = "FILE";
     private long id;
     @JsonView(ResourceJsonViews.DataTableUIGrid.class)
     private Environment environment;
@@ -31,7 +32,8 @@ public class Endpoint {
     @JsonSubTypes({
             @JsonSubTypes.Type(value = SOAPEndpointProperties.class, name = Endpoint.TYPE_SOAP),
             @JsonSubTypes.Type(value = MQEndpointProperties.class, name = Endpoint.TYPE_MQ),
-            @JsonSubTypes.Type(value = IIBEndpointProperties.class, name = Endpoint.TYPE_IIB)
+            @JsonSubTypes.Type(value = IIBEndpointProperties.class, name = Endpoint.TYPE_IIB),
+            @JsonSubTypes.Type(value = FILEEndpointProperties.class, name = Endpoint.TYPE_FILE)
     })
     private Properties otherProperties = new Properties();
 
