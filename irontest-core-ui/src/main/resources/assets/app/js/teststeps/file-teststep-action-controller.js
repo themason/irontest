@@ -24,8 +24,7 @@ angular.module('irontest').controller('FILETeststepActionController', ['$scope',
       var endpoint = $scope.teststep.endpoint;
       var endpointOtherProperties = endpoint.otherProperties;
 
-      return !endpointOtherProperties.fileName || !endpointOtherProperties.filePath || 
-      	!endpointOtherProperties.contents;
+      return !endpointOtherProperties.fileName || !endpointOtherProperties.filePath ;
     };
 
     $scope.actionInfoIncomplete = function() {
@@ -41,6 +40,7 @@ angular.module('irontest').controller('FILETeststepActionController', ['$scope',
       var teststep = new Teststeps($scope.teststep);
       $scope.steprun.status = 'ongoing';
       teststep.$run(function(basicTeststepRun) {
+      	$scope.steprun.response = basicTeststepRun.response.value;
         $scope.steprun.status = 'finished';
         timer = $timeout(function() {
           $scope.steprun.status = null;
