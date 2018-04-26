@@ -11,12 +11,32 @@
   </div>
   <div class="col-lg-1">
     <button type="button" class="btn btn-info btn-block" ng-click="doAction()"
-            ng-disabled="appStatus.isForbidden() || endpointInfoIncomplete() ||
-              (actionInfoIncomplete()) || steprun.status === 'ongoing'">Do</button>
+            ng-disabled="appStatus.isForbidden() || endpointInfoIncomplete() || actionInfoIncomplete()) || 
+              steprun.status === 'ongoing'">Do</button>
   </div>
   <div class="col-lg-4">       <!-- Action run status message -->
-    <h5 ng-if="steprun.status === 'ongoing'">
-      {{ teststep.action === 'Read' ? 'Reading' : 'Writing' }} file...</h5>
-    <h5 ng-if="steprun.status === 'finished'">{{ steprun.infoMessage }}</h5>
+  	<h5 ng-if="teststep.action === 'Read' && steprun.status === 'ongoing'">Reading file ...</h5>
+  	<h5 ng-if="teststep.action === 'Read' && steprun.status === 'finished'">File read.</h5>
+  	<h5 ng-if="teststep.action === 'Write' && steprun.status === 'ongoing'">Writing file ...</h5>
+  	<h5 ng-if="teststep.action === 'Write' && steprun.status === 'finished'">File written.</h5>
+  </div>
+</div>
+
+<div ng-if="teststep.action === 'Read'">
+  <div class="form-group form-group-reduced-bottom-margin" height-adjustable-element-in-column="0.7">
+	<div class="col-lg-10 full-height">
+	  <textarea name="contents" ng-model="steprun.response" id="contents" placeholder="File Contents" 
+	            class="form-control full-height-important" spellcheck="false"
+	            ng-readonly="appStatus.isForbidden()"></textarea>
+	</div>
+  </div>
+</div>
+<div ng-if="teststep.action === 'Write'">
+  <div class="form-group form-group-reduced-bottom-margin" height-adjustable-element-in-column="0.7">
+	<div class="col-lg-10 full-height">
+	  <textarea name="contents" ng-model="teststep.request" id="contents" placeholder="File Contents" 
+	            class="form-control full-height-important" spellcheck="false" ng-change="actionChanged(teststepForm.$valid)"
+	            ng-readonly="appStatus.isForbidden()"></textarea>
+	</div>
   </div>
 </div>
