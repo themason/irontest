@@ -150,7 +150,9 @@ public abstract class TestcaseRunner {
                 assertionVerificationInput = ((DBAPIResponse) apiResponse).getRowsJSON();
             } else if (Teststep.TYPE_MQ.equals(teststep.getType())) {
                 assertionVerificationInput = ((MQAPIResponse) apiResponse).getValue();
-            } else {
+            } else if (Teststep.TYPE_FILE.equals(teststep.getType())) {
+            	assertionVerificationInput = ((FILEAPIResponse) apiResponse).getValue();
+        } else {
                 assertionVerificationInput = apiResponse;
             }
 

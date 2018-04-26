@@ -70,6 +70,8 @@ public class TeststepResource {
             teststep.setOtherProperties(new SOAPTeststepProperties());
         } else if (Teststep.TYPE_MQ.equals(teststep.getType())) {
             teststep.setOtherProperties(new MQTeststepProperties());
+        } else if (Teststep.TYPE_FILE.equals(teststep.getType())) {
+        	teststep.setOtherProperties(new FILETeststepProperties());
         } else if (Teststep.TYPE_WAIT.equals(teststep.getType())) {
             teststep.setOtherProperties(new WaitTeststepProperties(1000));   //  there is no point to wait for 0 milliseconds
         }
