@@ -1,9 +1,81 @@
+<div class="form-group">
+  <label class="col-lg-2 control-label">Destination Type</label>
+  <div class="col-lg-2 text-center">
+    <label class="control-label" title="Write or read file from local or network location">
+      <input type="radio" name="endpointDestinationType" id="endpointDestinationTypeLocalNetwork"
+             ng-model="teststep.endpoint.otherProperties.destinationType"
+             ng-change="endpointDestinationTypeChanged(teststepForm.$valid)" value="Local_Network"
+             ng-disabled="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">Local/Network
+    </label>
+  </div>
+  <div class="col-lg-2 text-center">
+    <label class="control-label" title="Write or read file from FTP_SFTP location">
+      <input type="radio" name="endpointDestinationType" id="endpointDestinationTypeFtpSftp"
+             ng-model="teststep.endpoint.otherProperties.destinationType"
+             ng-change="endpointDestinationTypeChanged(teststepForm.$valid)" value="Ftp_Sftp"
+             ng-disabled="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">FTP/SFTP
+    </label>
+  </div>
+</div>
+<div ng-if="teststep.endpoint.otherProperties.destinationType === 'Ftp_Sftp'" class="form-group">
+  <label for="protocol" class="col-lg-2 control-label">Transfer Protocol</label>
+  <div class="col-lg-2">
+    <select name="endpointTransferProtocol" id="endpointTransferProtocol" class="form-control"
+            ng-model="teststep.endpoint.otherProperties.transferProtocol" 
+            ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)"
+            ng-disabled="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">
+      <option value="FTP">FTP</option>
+      <!--option value="FTPS">FTPS</option-->
+      <option value="SFTP">SFTP</option>      
+    </select>
+  </div>
+</div>
+<div ng-if="teststep.endpoint.otherProperties.destinationType === 'Ftp_Sftp'" class="form-group">
+  <label for="endpointHostname" class="col-lg-2 control-label">Hostname</label>
+  <div class="col-lg-10">
+    <input name="endpointHostname" type="text" class="form-control"
+           ng-model="teststep.endpoint.otherProperties.hostname"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)"
+           id="endpointHostname" spellcheck="false"
+           ng-readonly="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
+<div ng-if="teststep.endpoint.otherProperties.destinationType === 'Ftp_Sftp'" class="form-group">
+  <label for="endpointPort" class="col-lg-2 control-label">Port</label>
+  <div class="col-lg-10">
+    <input name="endpointPort" type="text" class="form-control"
+           ng-model="teststep.endpoint.otherProperties.port"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)"
+           id="endpointPort" spellcheck="false"
+           ng-readonly="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
+<div ng-if="teststep.endpoint.otherProperties.destinationType === 'Ftp_Sftp'" class="form-group">
+  <label for="endpointUsername" class="col-lg-2 control-label">Username</label>
+  <div class="col-lg-10">
+    <input name="endpointUsername" type="text" class="form-control"
+           ng-model="teststep.endpoint.otherProperties.username"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)"
+           id="endpointUsername" spellcheck="false"
+           ng-readonly="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
+<div ng-if="teststep.endpoint.otherProperties.destinationType === 'Ftp_Sftp'" class="form-group">
+  <label for="endpointPassword" class="col-lg-2 control-label">Password</label>
+  <div class="col-lg-10">
+    <input name="endpointPassword" type="password" class="form-control"
+           ng-model="teststep.endpoint.otherProperties.password"
+           ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)"
+           id="endpointPassword" spellcheck="false"
+           ng-readonly="appStatus.isForbidden() || (!isInShareEndpointMode() && teststep.endpoint.environment)">
+  </div>
+</div>
 <div class="form-group required">
   <label for="endpointFileName" class="col-lg-2 control-label">FileName</label>
   <div class="col-lg-10">
     <input name="endpointFileName" type="text" class="form-control" ng-model="teststep.endpoint.otherProperties.fileName"
            ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
-           id="endpointHost" ng-readonly="appStatus.isForbidden() ||
+           id="endpointFileName" ng-readonly="appStatus.isForbidden() ||
              (!isInShareEndpointMode() && teststep.endpoint.environment)">
   </div>
 </div>
@@ -12,15 +84,7 @@
   <div class="col-lg-10">
     <input name="endpointFilePath" type="text" class="form-control" ng-model="teststep.endpoint.otherProperties.filePath"
            ng-change="isInShareEndpointMode() ? angular.noop() : autoSave(teststepForm.$valid)" spellcheck="false"
-           id="endpointHost" ng-readonly="appStatus.isForbidden() ||
+           id="endpointFilePath" ng-readonly="appStatus.isForbidden() ||
              (!isInShareEndpointMode() && teststep.endpoint.environment)">
-  </div>
-</div>
-<div class="form-group form-group-reduced-bottom-margin" height-adjustable-element-in-column="0.7">
-  <label for="endpointContents" class="col-lg-2 control-label">Contents</label>
-  <div class="col-lg-10 full-height">
-    <textarea name="endpointContents" ng-change="autoSave(teststepForm.$valid)" ng-model="teststep.endpoint.otherProperties.contents"
-              id="endpointContents" placeholder="Contents" class="form-control full-height-important" spellcheck="false"
-              ng-readonly="appStatus.isForbidden()"></textarea>
   </div>
 </div>
